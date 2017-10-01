@@ -38,37 +38,37 @@ Make your output as readable as possible. Next time you would need to create thi
 
 1. (20 points) Cleanup the `Facebook` and `Twitter` column to let them contain only the facebook username or twitter handle name. I.e., replace "https://www.facebook.com/pages/Cameron-Park-Farmers-Market/97634216535?ref=hl" with "Cameron-Park-Farmers-Market", "https://twitter.com/FarmMarket125th" with "FarmMarket125th", and "\@21acres" with "21acres".
 
-mydata <- as_tibble(read.csv("farmers_market.csv"))
+	mydata <- as_tibble(read.csv("farmers_market.csv"))
 
-stripe .com from the colum facebook
+	stripe .com from the colum facebook
 
-ans <- as_tibble(sub("(?:.*(?<=.com\\/))([a-zA-Z0-9]+\\/?)(?:(?=\\/).*)?", "\\1", 
-                      mydata$Facebook, perl = TRUE))
+	ans <- as_tibble(sub("(?:.*(?<=.com\\/))([a-zA-Z0-9]+\\/?)(?:(?=\\/).*)?", "\\1", 
+			      mydata$Facebook, perl = TRUE))
 
-remove pages
+	remove pages
 
-ans <- as_tibble(sub("(?:.*(?<=pages\\/))([a-zA-Z0-9]*)", "\\1", ans[[1]], perl = TRUE))
+	ans <- as_tibble(sub("(?:.*(?<=pages\\/))([a-zA-Z0-9]*)", "\\1", ans[[1]], perl = TRUE))
 
-ans <- as_tibble(sub("([1-9A-Za-z-.]*)(?:(?=\\?).*)", "\\1", ans[[1]], perl = TRUE))
+	ans <- as_tibble(sub("([1-9A-Za-z-.]*)(?:(?=\\?).*)", "\\1", ans[[1]], perl = TRUE))
 
-remove backslash and remaining content
+	remove backslash and remaining content
 
-ans <- as_tibble(sub("([a-zA-Z0-9]*)(?:(?=\\/).*)", "\\1", ans[[1]], perl = TRUE))
+	ans <- as_tibble(sub("([a-zA-Z0-9]*)(?:(?=\\/).*)", "\\1", ans[[1]], perl = TRUE))
 
-remove question mark and remaining content to get fackbook user name 
+	remove question mark and remaining content to get fackbook user name 
 
-fbUserName <- as_tibble(sub("([a-zA-Z0-9]*)(?:(?=\\?).*)", "\\1", ans[[1]], perl = TRUE))
+	fbUserName <- as_tibble(sub("([a-zA-Z0-9]*)(?:(?=\\?).*)", "\\1", ans[[1]], perl = TRUE))
 
 
 
-stripe .com from the colum twitter
+	stripe .com from the colum twitter
 
-ans <- as_tibble(sub("(?:.*(?<=.com\\/))([a-zA-Z0-9]+\\/?)(?:(?=\\/).*)?", "\\1", 
-                      mydata$Twitter, perl = TRUE))
+	ans <- as_tibble(sub("(?:.*(?<=.com\\/))([a-zA-Z0-9]+\\/?)(?:(?=\\/).*)?", "\\1", 
+			      mydata$Twitter, perl = TRUE))
 
-remove @
+	remove @
 
-twUserName <- as_tibble(sub("@([A-Za-z0-9]+)", "\\1", ans[[1]], perl = TRUE))
+	twUserName <- as_tibble(sub("@([A-Za-z0-9]+)", "\\1", ans[[1]], perl = TRUE))
 
 
 2. (20 points) Clean up the `city` and `street` column. Remove state and county names from the `city` column and consolidate address spellings to be more consistent (e.g. "St.", "ST.", "Street" all become "St"; "and" changes to "&", etc...).
