@@ -116,28 +116,28 @@ Make your output as readable as possible. Next time you would need to create thi
 
 	farmerLocation <- mydata %>% group_by(Location) %>% summarise(Number = n()) %>% mutate(pct = round(Number/sum(Number) * 
 											      
-		100, 2), 
+	100, 2), 
 											      
-		loc = fct_recode(Location, 
-																			`CPS` = "Closed-off public street", 
+	loc = fct_recode(Location, 
+																		`CPS` = "Closed-off public street", 
 																	
-		`CWWMF` = "Co-located with wholesale market facility", 
+	`CWWMF` = "Co-located with wholesale market facility", 
 															
-		`EI` = "Educational institution", 
+	`EI` = "Educational institution", 
 	
-		`FBI` = "Faith-based institution (e.g., church, mosque, synagogue, temple)", 
+	`FBI` = "Faith-based institution (e.g., church, mosque, synagogue, temple)", 
 															
-		`FGBG` = "Federal/State government building grounds", 
+	`FGBG` = "Federal/State government building grounds", 
 															
-		`HI` = "Healthcare Institution", 
+	`HI` = "Healthcare Institution", 
 															
-		`LGBG` = "Local government building grounds", 
+	`LGBG` = "Local government building grounds", 
 															
-		`OAFF` = "On a farm from: a barn, a greenhouse, a tent, a stand, etc", 
+	`OAFF` = "On a farm from: a barn, a greenhouse, a tent, a stand, etc", 
 															
-		`OTHER` = "Other",
+	`OTHER` = "Other",
 	
-		`PBPL` = "Private business parking lot"))
+	`PBPL` = "Private business parking lot"))
 
 
 	ggplot(data = farmerLocation, mapping = aes(x = reorder(loc, Number), y = Number)) + 
