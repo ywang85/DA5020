@@ -41,10 +41,12 @@ Make your output as readable as possible. Next time you would need to create thi
 mydata <- as_tibble(read.csv("farmers_market.csv"))
 
 stripe .com from the colum facebook
+
 ans <- as_tibble(sub("(?:.*(?<=.com\\/))([a-zA-Z0-9]+\\/?)(?:(?=\\/).*)?", "\\1", 
                       mydata$Facebook, perl = TRUE))
 
 remove pages
+
 ans <- as_tibble(sub("(?:.*(?<=pages\\/))([a-zA-Z0-9]*)", "\\1", ans[[1]], perl = TRUE))
 
 ans <- as_tibble(sub("([1-9A-Za-z-.]*)(?:(?=\\?).*)", "\\1", ans[[1]], perl = TRUE))
@@ -58,32 +60,49 @@ fbUserName <- as_tibble(sub("([a-zA-Z0-9]*)(?:(?=\\?).*)", "\\1", ans[[1]], perl
 
 
 stripe .com from the colum twitter
+
 ans <- as_tibble(sub("(?:.*(?<=.com\\/))([a-zA-Z0-9]+\\/?)(?:(?=\\/).*)?", "\\1", 
                       mydata$Twitter, perl = TRUE))
 
 remove @
+
 twUserName <- as_tibble(sub("@([A-Za-z0-9]+)", "\\1", ans[[1]], perl = TRUE))
 
 
 2. (20 points) Clean up the `city` and `street` column. Remove state and county names from the `city` column and consolidate address spellings to be more consistent (e.g. "St.", "ST.", "Street" all become "St"; "and" changes to "&", etc...).
 
 state and county names from the city column
+
 mydata$city <- sub("([a-zA-Z]+),.*", "\\1", perl = TRUE, mydata$city)
 
 consolidate address spellings to be more consistent
+
 St., ST. to St
+
 mydata$street <- sub("\\b(St\\.?) | (ST\\.?)", "St", perl = TRUE, mydata$street)
+
 street/ STREET to St
+
 mydata$street <- sub("\\b([Ss][Tt][Rr][Ee][Ee][Tt])", "St", perl = TRUE, mydata$street)
+
 Rd. to Rd
+
 mydata$street <- sub("\\b(Rd\\.?)", "Rd", perl = TRUE, mydata$street)
+
 AND, and to &
+
 mydata$street <- sub("\\b(([Aa][Nn][Dd]))", "&", perl = TRUE, mydata$street)
+
 AVENUE, avenue to ave
+
 mydata$street <- sub("\\b(([Aa][Vv][Ee][Nn][Uu][Ee]))", "Ave", perl = TRUE, mydata$street)
+
 HIGHWAY, highway to Hwy
+
 mydata$street <- sub("\\b(([H][h][I][i][G][g][H][h][W][w][A][a][Y][y]))", "Hwy", perl = TRUE, mydata$street)
+
 ROAD, road to Rd
+
 mydata$street <- sub("\\b([R][r][O][o][A][a][D][d])", "Rd", perl = TRUE, mydata$street)
 
 3. (20 points) Create a new data frame (tibble) that explains the online presence of each state's farmers market. I.e., how many percentages of them have a facebook account? A twitter account? Or either of the accounts? (Hint: use the `is.na()` function)
@@ -117,12 +136,15 @@ ggplot(data = farmerLocation, mapping = aes(x = reorder(loc, Number), y = Number
 5. (20 points) Write code to sanity check the `kyfprojects` data. For example, does `Program Abbreviation` always match `Program Name` for all the rows? (Try thinking of your own rules, too.)
 
 library(readxl)
+
 mydata <- as.tibble(read_xls("kyfprojects.xls"))
 
 get the abbreviation, and we want to remove duplicate elements
+
 abbreviation <- unique(mydata$'Program Abbreviation')
 
 get the program name with no duplication
+
 programName <- unique(mydata$'Program Name')
 
 from the result we can conclude that "Hunger-Free Communities Grants" and "Hunger-Free Communities"
