@@ -109,9 +109,7 @@ Make your output as readable as possible. Next time you would need to create thi
 
 3. (20 points) Create a new data frame (tibble) that explains the online presence of each state's farmers market. I.e., how many percentages of them have a facebook account? A twitter account? Or either of the accounts? (Hint: use the `is.na()` function)
 
-newDataFrame <- mydata %>% group_by(State) %>% summarize(Facebook = sum(Facebook != "", 
-            												na.rm = T) / n(), 
-															Twitter = sum(Twitter != "", na.rm = T) / n())
+	newDataFrame <- mydata %>% group_by(State) %>% summarize(Facebook = sum(Facebook != "", na.rm = T) / n(), Twitter = sum(Twitter != "", na.rm = T) / n())
 
 4. (20 points) 
     Some of the farmer market names are quite long. Can you make them shorter by using the `forcats::fct_recode` function? Create a plot that demonstrates the number of farmers markets per location type. The locations should be ordered in descending order where the top of the graph will have the one with the highest number of markets.
@@ -137,21 +135,21 @@ ggplot(data = farmerLocation, mapping = aes(x = reorder(loc, Number), y = Number
 
 5. (20 points) Write code to sanity check the `kyfprojects` data. For example, does `Program Abbreviation` always match `Program Name` for all the rows? (Try thinking of your own rules, too.)
 
-library(readxl)
+	library(readxl)
 
-mydata <- as.tibble(read_xls("kyfprojects.xls"))
+	mydata <- as.tibble(read_xls("kyfprojects.xls"))
 
-get the abbreviation, and we want to remove duplicate elements
+	get the abbreviation, and we want to remove duplicate elements
 
-abbreviation <- unique(mydata$'Program Abbreviation')
+	abbreviation <- unique(mydata$'Program Abbreviation')
 
-get the program name with no duplication
+	get the program name with no duplication
 
-programName <- unique(mydata$'Program Name')
+	programName <- unique(mydata$'Program Name')
 
-from the result we can conclude that "Hunger-Free Communities Grants" and "Hunger-Free Communities"
-have the same abbreviation, "Federal-State Marketing Improvement Program" and "Federal State Marketing Improvement Program"
-have the same abbreviation
+	From the result we can conclude that "Hunger-Free Communities Grants" and "Hunger-Free Communities"
+	have the same abbreviation, "Federal-State Marketing Improvement Program" and "Federal State Marketing Improvement Program"
+	have the same abbreviation
 
 ## Submission
 You need to submit an .Rmd extension file as well as the generated pdf file. Be sure to state all the assumptions and give explanations as comments in the .Rmd file wherever needed to help us assess your submission. Please name the submission file LAST_FirstInitial_1.Rmd for example for John Smith's 1st assignment, the file should be named Smith_J_1.Rmd. 
