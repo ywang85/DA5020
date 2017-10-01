@@ -115,7 +115,6 @@ Make your output as readable as possible. Next time you would need to create thi
     Some of the farmer market names are quite long. Can you make them shorter by using the `forcats::fct_recode` function? Create a plot that demonstrates the number of farmers markets per location type. The locations should be ordered in descending order where the top of the graph will have the one with the highest number of markets.
 
 	farmerLocation <- mydata %>% group_by(Location) %>% summarise(Number = n()) %>% mutate(pct = round(Number/sum(Number) * 
-											      
 											      100, 2), 
 											      
 											      loc = fct_recode(Location, 
