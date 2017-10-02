@@ -114,29 +114,16 @@ Make your output as readable as possible. Next time you would need to create thi
 4. (20 points) 
     Some of the farmer market names are quite long. Can you make them shorter by using the `forcats::fct_recode` function? Create a plot that demonstrates the number of farmers markets per location type. The locations should be ordered in descending order where the top of the graph will have the one with the highest number of markets.
 
-	farmerLocation <- mydata %>% group_by(Location) %>% summarise(Number = n()) %>% mutate(pct = round(Number/sum(Number) * 
-											      
-	100, 2), 
-											      
-	loc = fct_recode(Location, 
-																		`CPS` = "Closed-off public street", 
-																	
-	`CWWMF` = "Co-located with wholesale market facility", 
-															
+	farmerLocation <- mydata %>% group_by(Location) %>% summarise(Number = n()) %>% mutate(pct = round(Number/sum(Number) * 		100, 2), 										      
+	loc = fct_recode(Location,
+	`CPS` = "Closed-off public street",													`CWWMF` = "Co-located with wholesale market facility", 										
 	`EI` = "Educational institution", 
-	
-	`FBI` = "Faith-based institution (e.g., church, mosque, synagogue, temple)", 
-															
-	`FGBG` = "Federal/State government building grounds", 
-															
-	`HI` = "Healthcare Institution", 
-															
-	`LGBG` = "Local government building grounds", 
-															
-	`OAFF` = "On a farm from: a barn, a greenhouse, a tent, a stand, etc", 
-															
+	`FBI` = "Faith-based institution (e.g., church, mosque, synagogue, temple)",							
+	`FGBG` = "Federal/State government building grounds",										
+	`HI` = "Healthcare Institution", 												
+	`LGBG` = "Local government building grounds", 											
+	`OAFF` = "On a farm from: a barn, a greenhouse, a tent, a stand, etc", 								
 	`OTHER` = "Other",
-	
 	`PBPL` = "Private business parking lot"))
 
 
